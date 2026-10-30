@@ -1,0 +1,1 @@
+this is a bunch of projects that I had abandoned, or just thought about for a while and forgot. These are projects I started when I was learning python sorry if they are not impressive, I hope I grow some more in the future. thanks for viewing though.

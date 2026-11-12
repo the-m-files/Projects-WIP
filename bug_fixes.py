@@ -1,18 +1,42 @@
 
-import random
+import random #why is this here? bru...
 
 
 class Creature:
+
+    
     def __init__(self, name, health=100, energy=50, strength=10):
         self.name = name
-        self.health = health
-        self.energy = energy
+        self._health = health
+        self._energy = energy
         self.strength = strength
+
+    @property
+    def energy(self):
+        return self._energy
+
+    @energy.setter
+    def energy(self, value):
+        if value > 0:  
+            self._energy = value
+        else:
+            self._energy = 0
+
+    @property
+    def health(self):
+        return self._health
+
+    @health.setter
+    def health(self, value):
+        if value < 0:
+            self._health = 0
+        else:
+            self._health = value
 
     def train(self): 
         """
         Whenever this function is called, it subtracts 10 units from energy, and adds 5 to stregnth. If its lower than 10 then it avoids it.
-         """
+        """
         if self.energy >= 10:
             self.strength += 5
             self.energy -= 10
@@ -33,15 +57,16 @@ class Creature:
         """
         This just increases the health by 15 units no matter what.
         """
-        self.health += 15
+        self._health += 15
         print(f"{self.name} ate. Health: {self.health}")
 
     def attack(self, opponent):
         """
         If the energy of the attacking mob is greater than 0, then it will subtract the opponents health by its stregnth, else it avoids it.
+        Every time this is called it will lower the energy of the attacking mob by 10 units.
         """
         if self.energy > 0:
-            opponent.health -= self.strength
+            opponent._health -= self.strength
             self.energy -= 10
             print(f"{self.name} attacked {opponent.name}!")
         else:
@@ -78,7 +103,7 @@ def battle(creature1, creature2): #this function doesn't have any bugs atleast a
         else:
             creature2.attack(creature1)
 
-        if turn > 20:
+        if turn > 100:
             print("Battle timed out!")
             break
 
@@ -88,15 +113,15 @@ def battle(creature1, creature2): #this function doesn't have any bugs atleast a
 
 
 # Test arena
-slime = Creature("Slime", health=40, energy=30, strength=10)
-dragon = Creature("Dragon", health=60, energy=20, strength=20)
+dragon1 = Creature("Dragon1", health=100, energy=20, strength=20)
+dragon2 = Creature("Dragon2", health=100, energy=20, strength=20)
 
 # slime.status()
 # slime.train() #train works
 # slime.status()
 
-slime.status()
-slime.rest()
-slime.status()
+dragon1.status()
+dragon1.rest()
+dragon1.status()
 print("\n=== BATTLE ===")
-battle(slime, dragon)
+battle(dragon1, dragon2)

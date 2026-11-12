@@ -7,6 +7,9 @@ class Game:
         self.map.append([0 for x in range(0, 11) for x in range(0, 11)])
         print("map initialzed")
 
+    def place_ship(vessel, x, y):
+        """this will place the ship's bow at the x, y and then the rest after this point"""
+        pass
 ships = [
 
     [1, 1],
@@ -32,5 +35,5 @@ class Ship:
 
 match1 = Game()
 print(match1.map)
-ship1 = Ship([1, 1], "h", 0)
+ship1 = Ship(ships[1], "h", 0)
 print(ship1)

@@ -1,15 +1,21 @@
+import random
+
+
 class Game:
     def __init__(self):
         self.map = []
         self.initialize_map()
 
     def initialize_map(self):
-        self.map.append([0 for x in range(0, 11) for x in range(0, 11)])
-        print("map initialzed")
+        self.map.append([0 for x in range(0, 10) for y in range(0, 10)])
 
-    def place_ship(vessel, x, y):
-        """this will place the ship's bow at the x, y and then the rest after this point"""
-        pass
+    def place(self, ship, x, y):
+        for i in range(0, ship.size):
+            self.map[x][y] = 1
+            print(i)
+
+
+
 ships = [
 
     [1, 1],
@@ -20,10 +26,9 @@ ships = [
 ]
 
 class Ship:
-    def __init__(self, type, orientation, position):
-        self.type = type
+    def __init__(self, type, orientation):
+        self.type = ships[type]
         self.orientation = orientation
-        self.position = position
         self.size = len(self.type)
 
         # if self.orientation == "v":
@@ -33,7 +38,7 @@ class Ship:
     def __str__(self):
         return f"{self.type}"
 
-match1 = Game()
-print(match1.map)
-ship1 = Ship(ships[1], "h", 0)
-print(ship1)
+board = Game()
+launcher=Ship(1, "h")
+board.place(launcher, 0, 0)
+print(board.map)

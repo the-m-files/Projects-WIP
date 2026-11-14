@@ -7,18 +7,22 @@ class Game:
         self.initialize_map()
 
     def initialize_map(self):
-        for i in range(0, 11):
+        for i in range(0, 10):
             self.map.append([0,0,0,0,0,0,0,0,0,0])
 
-    def place(self, ship, x, y):
-        if ship.orientation=="h":
+    def place(self, ship, orientation, x, y):
+        if orientation == "h":
             for i in range(0, ship.size):
-                self.map[y][x+i] = 1
-                print(i)
+                if x+(ship.size) <= 10:
+                    self.map[y][x+i] = 1
+                else:
+                    print("Invalid Ship Position")
+                    break
+                    
 
         else:
             for i in range(0, ship.size):
-                self.map[y+i-1][x] = 1
+                self.map[y+i][x] = 1
                 print(i)
 
     def hit(self, x, y):
@@ -27,8 +31,6 @@ class Game:
             self.map[x][y] == "H"
         else:
             self.map[x][y] == "x"
-
-
 
 ships = [
     [1, 1],
@@ -39,9 +41,8 @@ ships = [
 ]
 
 class Ship:
-    def __init__(self, type, orientation):
+    def __init__(self, type):
         self.type = ships[type]
-        self.orientation = orientation
         self.size = len(self.type)
 
         # if self.orientation == "v":
@@ -51,9 +52,15 @@ class Ship:
     def __str__(self):
         return f"{self.type}"
 
-board = Game()
-launcher=Ship(1, "h")
-board.place(launcher, 0, 3)
-board.hit(0, 3)
-print(board.map)
+#TESTING: 
 
+# board = Game()
+# launcher=Ship(1)
+# board.place(launcher,"v", 7, 2)
+# board.hit(0, 1)
+# print(board.map)
+
+
+#Game loop
+player1 = Game()
+player2 = Game()

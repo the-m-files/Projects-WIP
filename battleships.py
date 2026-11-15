@@ -9,11 +9,10 @@ class Game:
     def initialize_map(self):
         for i in range(0, 10):
             self.map.append([0,0,0,0,0,0,0,0,0,0])
-
-    def place(self, ship, orientation, x, y):
+    def place(self, size, orientation, x, y):
         if orientation == "h":
-            for i in range(0, ship.size):
-                if x+(ship.size) <= 10:
+            for i in range(0, size):
+                if x+(size) <= 10:
                     self.map[y][x+i] = 1
                 else:
                     print("Invalid Ship Position")
@@ -21,9 +20,13 @@ class Game:
                     
 
         else:
-            for i in range(0, ship.size):
-                self.map[y+i][x] = 1
-                print(i)
+            for i in range(0, size):
+                if y+(size) <= 10:
+                    self.map[y+i][x] = 1
+                #print(i)
+                else:
+                    print("Invalid Ship Position")
+                    break
 
     def hit(self, x, y):
         if self.map[x][y] == 1:
@@ -32,6 +35,9 @@ class Game:
         else:
             self.map[x][y] == "x"
 
+    def __str__(self):
+        return self.map
+
 ships = [
     [1, 1],
     [1, 1, 1],
@@ -39,18 +45,6 @@ ships = [
     [1, 1, 1, 1],
     [1, 1, 1, 1, 1],
 ]
-
-class Ship:
-    def __init__(self, type):
-        self.type = ships[type]
-        self.size = len(self.type)
-
-        # if self.orientation == "v":
-        #     for i in range(0, self.size):
-        #         self.type.append(1 for x in range(0,1) for y in range(0, self.size))
-
-    def __str__(self):
-        return f"{self.type}"
 
 #TESTING: 
 
@@ -64,3 +58,18 @@ class Ship:
 #Game loop
 player1 = Game()
 player2 = Game()
+print(player1.map)
+
+for ship in ships:
+
+    print(f"ship type: {ship}")
+
+    coords = input("where would you like to place the ships?(top left is 0,0): ")
+    x, y = coords.split(" ")
+    int(x)
+    int(y)
+
+    orientation = input("what orientation would u like ur ship to be?(h, v): ")
+
+    player1.place(len(ship), orientation, x, y)
+    print(player1.map)

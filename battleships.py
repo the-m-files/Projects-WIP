@@ -2,6 +2,9 @@ import random
 
 
 class Game:
+
+    ships_hit = 0
+
     def __init__(self):
         self.map = []
         self.initialize_map()
@@ -32,6 +35,7 @@ class Game:
         if self.map[x][y] == 1:
             print("HIT SHIP")
             self.map[x][y] = "H"
+            self.ships_hit +=1
         else:
             self.map[x][y] = "X"
 

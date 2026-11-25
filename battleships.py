@@ -12,10 +12,11 @@ class Game:
     def initialize_map(self):
         for i in range(0, 10):
             self.map.append([0,0,0,0,0,0,0,0,0,0])
+
     def place(self, size, orientation, x, y):
         if orientation == "h":
             for i in range(0, size):
-                if x+(size) <= 10:
+                if x+(size) <= 10 and self.map[x+i][y] == 0:
                     self.map[y][x+i] = 1
                 else:
                     print("Invalid Ship Position")
@@ -24,10 +25,11 @@ class Game:
 
         else:
             for i in range(0, size):
-                if y+(size) <= 10:
+                if y+(size) <= 10 and self.map[x][y+i] == 0:
                     self.map[y+i][x] = 1
                 #print(i)
                 else:
+                    print(self.map)
                     print("Invalid Ship Position")
                     break
 

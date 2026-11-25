@@ -10,4 +10,8 @@ class Board:
         else:
             return "not valid"
 
-    
+    def check_for_winner(self):
+        for row in self.board:
+            if row[0] == len(row(row[0])): #only works for horizontal
+                print(f"{row[0]} has won!")
+            
